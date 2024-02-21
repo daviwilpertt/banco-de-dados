@@ -6,7 +6,7 @@ id_fornecedor INT NOT NULL AUTO_INCREMENT,
 nome VARCHAR(45),
 nacionalidade VARCHAR(45),
 PRIMARY KEY (id_fornecedor)
-);
+);   
 
 CREATE TABLE categoria (
 id_categoria INT NOT NULL AUTO_INCREMENT,
