@@ -9,10 +9,17 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MariaDB",
+<<<<<<< HEAD
             "name": "conexao",
             "database": "banco",
             "username": "root",
             "password": "senai"
+=======
+            "name": "davi_w",
+            "database": "mysql",
+            "username": "root",
+            "password": "153407"
+>>>>>>> 3c69ee0f43ab672d6117fa4aa61dcc1c45aeab9b
         }
     ]
 }
