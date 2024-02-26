@@ -1,0 +1,8 @@
+ALTER TABLE nome_coluna
+	-DROP FOREIGN KEY // apaga a chave estrangeira
+	-ADD COLUMN // adciona coluna
+	-MODIFY COLUMN // muda o tipo de dado de uma coluna
+	-DROP COLUMN // apaga coluna
+	-RENAME COLUMN nome_coluna TO coluna // renomear coluna
+	-RENAME TO nome_tabela // muda o nome da tabela
+
