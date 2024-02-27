@@ -1,0 +1,23 @@
+ALTER TABLE cliente
+RENAME COLUMN num_celular TO telefone;
+
+ALTER TABLE categoria_cliente
+ADD COLUMN observacao TEXT;
+
+ALTER TABLE cliente
+ADD COLUMN renda TEXT;
+
+ALTER TABLE agencia
+MODIFY COLUMN nome_agencia VARCHAR(45);
+
+ALTER TABLE tipo_conta
+MODIFY COLUMN des_tipo_conta TEXT;
+
+ALTER TABLE cliente
+DROP COLUMN estado;
+
+ALTER TABLE categoria_cliente
+RENAME TO categoria;
+
+ALTER TABLE tipo_conta
+ADD COLUMN observacao TEXT;
