@@ -1,0 +1,28 @@
+SELECT * FROM cliente;
+
+INSERT INTO cliente
+(nome_cliente, categoria_cliente_id)
+VALUES
+('alan', 3), ('bida', 2), ('caio', 4), ('davi', 1), ('edu',1), ('fabio', 3), ('gabi', 2), ('helen', 4);
+
+
+SELECT * FROM categoria_cliente;
+
+INSERT INTO categoria_cliente
+(nome_categoria_cliente)
+VALUES
+('private'), ('exclusive'), ('gold'), ('basico');
+
+SELECT * FROM agencia;
+
+INSERT INTO agencia
+(nome_agencia)
+VALUES
+('campeche'), ('zinga'), ('cidade');
+
+SELECT * FROM tipo_conta;
+
+INSERT INTO tipo_conta
+(des_tipo_conta)
+VALUES
+('poupança'), ('corrente');

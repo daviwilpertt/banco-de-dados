@@ -7,3 +7,8 @@ ALTER TABLE nome_coluna
 	-RENAME TO nome_tabela // muda o nome da tabela
 
 so pode apagar tabela que não mandou nenhuma informação para outra tabela
+
+INSERT INTO nome_tabela
+(coluna)
+VALUES
+('valor')

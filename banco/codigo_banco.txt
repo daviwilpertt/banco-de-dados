@@ -2,25 +2,25 @@ CREATE DATABASE banco;
 USE banco;
 
 CREATE TABLE categoria_cliente (
-id_categoria_cliente INT NOT NULL,
+id_categoria_cliente INT NOT NULL AUTO_INCREMENT,
 nome_categoria_cliente VARCHAR(45),
 PRIMARY KEY (id_categoria_cliente)
 );
 
 CREATE TABLE agencia (
-id_agencia INT NOT NULL,
+id_agencia INT NOT NULL AUTO_INCREMENT,
 nome_agencia VARCHAR(45),
 PRIMARY KEY (id_agencia)
 );
 
 CREATE TABLE tipo_conta (
-id_tipo_conta INT NOT NULL,
+id_tipo_conta INT NOT NULL AUTO_INCREMENT,
 des_tipo_conta VARCHAR(100),
 PRIMARY KEY (id_tipo_conta)
 );
 
 CREATE TABLE cliente (
-    id_cliente INT NOT NULL,
+    id_cliente INT NOT NULL AUTO_INCREMENT,
     nome_cliente VARCHAR(45),
     cpf_cnpj VARCHAR(45),
     num_celular VARCHAR(45),
@@ -35,7 +35,7 @@ CREATE TABLE cliente (
 );
 
 CREATE TABLE conta (
-    id_conta INT NOT NULL,
+    id_conta INT NOT NULL AUTO_INCREMENT,
     val_saldo DECIMAL(6,2),
     agencia_id INT,
     cliente_id INT,
