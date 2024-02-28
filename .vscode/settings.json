@@ -10,9 +10,9 @@
             "port": 3306,
             "driver": "MariaDB",
             "name": "conexao",
-            "database": "banco",
+            "database": "loucura",
             "username": "root",
-            "password": "senai"
+            "password": "153407"
         }
     ]
 }
