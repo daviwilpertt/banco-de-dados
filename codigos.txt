@@ -11,3 +11,4 @@ so pode apagar tabela que não mandou nenhuma informação para outra tabela
 INSERT INTO nome_tabela (coluna) VALUES ('valor')
 DELETE FROM nome_tabela WHERE chave_primaria = 1;
 UPDATE nome_tabela SET atributo WHERE chave_primaria = 1;
+React retorna so uma coisa, não pode retornar 2 h1
