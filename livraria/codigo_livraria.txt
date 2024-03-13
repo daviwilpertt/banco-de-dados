@@ -1,0 +1,87 @@
+-- Active: 1710194765744@@127.0.0.1@3306@livraria
+USE livraria;
+
+CREATE TABLE cliente (
+    id_cliente INT NOT NULL AUTO_INCREMENT,
+    nome_cliente VARCHAR(45),
+    CPF_cliente BIGINT(11),
+    rua_cliente VARCHAR(45),
+    bairro_cliente VARCHAR(45),
+    cidade_cliente VARCHAR(45),
+    estado_cliente VARCHAR(45),
+    PRIMARY KEY (id_cliente)
+);
+
+CREATE TABLE financiador (
+    id_financiador INT NOT NULL AUTO_INCREMENT,
+    nome_financiador VARCHAR(45),
+    CNPJ_financiador BIGINT(14),
+    PRIMARY KEY (id_financiador)
+);
+
+CREATE TABLE autor (
+    id_autor INT NOT NULL AUTO_INCREMENT,
+    nome_autor VARCHAR(45),
+    rg_autor BIGINT(11),
+    PRIMARY KEY (id_autor)
+);
+
+CREATE TABLE editora (
+    id_editora INT NOT NULL AUTO_INCREMENT,
+    nome_fantasia_editora VARCHAR(45),
+    razao_social_editora VARCHAR(45),
+    telefone_editora VARCHAR(45),
+    rua_editora VARCHAR(45),
+    bairro_editora VARCHAR(45),
+    cidade_editora VARCHAR(45),
+    estado_editora VARCHAR(45),
+    PRIMARY KEY (id_editora)
+);
+
+CREATE TABLE livro (
+    id_livro INT NOT NULL AUTO_INCREMENT,
+    ISBN_livro INT,
+    titulo_livro VARCHAR(45),
+    valor_livro DECIMAL(3,2),
+    categoria_livro VARCHAR(45),
+    autor_id INT,
+    editora_id INT,
+    financiador_id INT,
+    PRIMARY KEY(id_livro),
+    Foreign Key (autor_id) REFERENCES autor (id_autor),
+    Foreign Key (editora_id) REFERENCES editora (id_editora),
+    Foreign Key (financiador_id) REFERENCES financiador (id_financiador)
+);
+
+CREATE TABLE pedido (
+    id_pedido INT NOT NULL AUTO_INCREMENT,
+    qnt_pedido INT,
+    livro_id INT,
+    cliente_id INT,
+    PRIMARY KEY (id_pedido),
+    Foreign Key (livro_id) REFERENCES livro (id_livro),
+    Foreign Key (cliente_id) REFERENCES cliente (id_cliente)
+);
+
+INSERT INTO autor
+(nome_autor, rg_autor)
+VALUES
+('Laura Montenegro', 32546895325), 
+('Gabriel Herrena', 73462790525), 
+('Laura Santos', 42578502146), 
+('Ricardo Mendes', 61479053680),
+('Sofia Fernandes', 85124680975)
+
+INSERT INTO cliente
+(nome_cliente, `CPF_cliente`,rua_cliente, bairro_cliente, cidade_cliente, estado_cliente)
+VALUES
+('pedro', 43215678906, 'Rua Seu Jorge', 'Primavera', 'Belo Porto', 'São Paulo'),
+('joão', 54321578905, 'Avenida Perigo', 'São Vicente', 'General', 'Espirito Sancto'),
+('helen', 75321689053, 'Centro', 'Lagosta', 'Lagoa Nova', 'Rondônia'),
+('guilerme', 16421456789, 'Servidão Samambaia', 'Eucalipto', 'Pinheiros', 'Pará'),
+('nego ney', 12345678901, 'Rua dos Sonhos', 'Insonia', 'Ilusão', 'Mental')
+
+INSERT INTO editora
+(nome_fantasia_editora, razao_social_editora, telefone_editora,rua_editora, bairro_editora, cidade_editora, estado_editora)
+VALUES
+('Estrela Literária', 'Estrela Literária Editora Ltda', 4886432145, 'Avenida Libelúla', 'São Pedro', 'Eucalipto', 'DEPOIS PENSO')
