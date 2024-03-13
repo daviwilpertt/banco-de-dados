@@ -30,7 +30,7 @@ CREATE TABLE editora (
     id_editora INT NOT NULL AUTO_INCREMENT,
     nome_fantasia_editora VARCHAR(45),
     razao_social_editora VARCHAR(45),
-    telefone_editora VARCHAR(45),
+    telefone_editora BIGINT,
     rua_editora VARCHAR(45),
     bairro_editora VARCHAR(45),
     cidade_editora VARCHAR(45),
@@ -40,9 +40,9 @@ CREATE TABLE editora (
 
 CREATE TABLE livro (
     id_livro INT NOT NULL AUTO_INCREMENT,
-    ISBN_livro INT,
+    ISBN_livro BIGINT,
     titulo_livro VARCHAR(45),
-    valor_livro DECIMAL(3,2),
+    valor_livro DECIMAL,
     categoria_livro VARCHAR(45),
     autor_id INT,
     editora_id INT,
@@ -79,9 +79,40 @@ VALUES
 ('joão', 54321578905, 'Avenida Perigo', 'São Vicente', 'General', 'Espirito Sancto'),
 ('helen', 75321689053, 'Centro', 'Lagosta', 'Lagoa Nova', 'Rondônia'),
 ('guilerme', 16421456789, 'Servidão Samambaia', 'Eucalipto', 'Pinheiros', 'Pará'),
-('nego ney', 12345678901, 'Rua dos Sonhos', 'Insonia', 'Ilusão', 'Mental')
+('nego ney', 12345678901, 'Rua dos Sonhos', 'Insonia', 'Ilusão', 'Mental');
 
 INSERT INTO editora
 (nome_fantasia_editora, razao_social_editora, telefone_editora,rua_editora, bairro_editora, cidade_editora, estado_editora)
 VALUES
-('Estrela Literária', 'Estrela Literária Editora Ltda', 4886432145, 'Avenida Libelúla', 'São Pedro', 'Eucalipto', 'DEPOIS PENSO')
+('Estrela Literária', 'Estrela Literária Editora Ltda', 48986432145, 'Avenida Libelúla', 'São Pedro', 'Eucalipto', 'Pernambuco'),
+('Páginas Imaginárias', 'Páginas Imaginarias Publicações Ltda', 11998643890, 'Rua Papa XIX', '25 de Março', 'Grostoli', 'Acre'),
+('Palavras Inventadas', 'Palavras Inventadas Edições', 14998054321, 'Servidão Moacir', 'Amendoim', 'Sapo', 'Sergipe'),
+('Livros Fantásticos', 'Fantásticas Publicações S.A.', 36932380581, 'Rua Augusta', 'Pé de Moleque', 'Lagarto', 'Rio Grando do Meio'),
+('Histórias Sem Fim', 'Infinito Editora', 89933067443, 'Servidão Wesley', 'Bombom', 'Jacaré', 'Santa Catarina');
+
+INSERT INTO financiador
+(nome_financiador, `CNPJ_financiador`)
+VALUES
+('Financiadora Literária S.A.', 12345678901234),
+('Apoiadora Cultural Ltda.', 98765674328905),
+('Fomentadora de Leitura Eireli', 63804215709643),
+('Patrono das Letras Ltda.', 16798456320547),
+('Contribuidora de Publicações S.A.', 46215798230254);
+
+INSERT INTO livro
+(`ISBN_livro`, titulo_livro, valor_livro, categoria_livro, autor_id, editora_id, financiador_id)
+VALUES
+(9788537807842, 'A Arte da Guerra', 29.90, 'Estratégia',  3, 4, 2),
+(9788576834848, 'O Pequeno Príncipe', 39.90, 'Ficção', 5, 1, 3),
+(9788535914849, 'Cem Anos de Solidão', 49.90, 'Romance', 4, 2, 3),
+(9788532530840, 'Harry Potter e a Pedra Filosofal', 59.90, 'Ficção', 2, 1, 4),
+(9788535909753, '1984', 34.90, 'Ficção', 4, 1, 5);
+
+INSERT INTO pedido
+(qnt_pedido, livro_id, cliente_id)
+VALUES
+(5, 1, 3),
+(2, 2, 5),
+(4, 3, 1),
+(7, 4, 2),
+(10, 5, 4);
