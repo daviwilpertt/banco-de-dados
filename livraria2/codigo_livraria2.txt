@@ -1,0 +1,70 @@
+ALTER TABLE livro
+MODIFY categoria_livro ENUM(
+    'horror', 'romance', 'ficção', 'ação'
+);
+
+ALTER TABLE editora
+MODIFY nome_fantasia_editora ENUM(
+    'Editora A', 'Editora B', 'Editora C'
+) NOT NULL;
+
+ALTER TABLE editora MODIFY razao_social_editora VARCHAR(45) NOT NULL;
+
+ALTER Table editora
+ADD COLUMN pais_editora VARCHAR(45) DEFAULT("Brasil");
+
+ALTER TABLE autor MODIFY nome_autor VARCHAR(45) NOT NULL;
+
+ALTER TABLE cliente
+MODIFY nome_cliente VARCHAR(45) NOT NULL,
+MODIFY CPF_cliente BIGINT(11) UNIQUE,
+ADD COLUMN pais_cliente VARCHAR(45) DEFAULT("Brasil");
+
+ALTER TABLE pedido MODIFY qnt_pedido INT CHECK (qnt_pedido > 0);
+
+ALTER TABLE livro
+MODIFY valor_livro DECIMAL(10, 2) CHECK (valor_livro > 0);
+
+ALTER TABLE financiador
+MODIFY nome_financiador VARCHAR(45) DEFAULT("Financiador Público")
+
+INSERT INTO autor 
+(nome_autor, rg_autor) 
+VALUES 
+("manoel gomes", 12345678910),
+("luan perereira", 12345678908),
+("renato aragão", 1234567895);
+
+INSERT INTO cliente
+(nome_cliente,`CPF_cliente`)
+VALUES
+("elias maluco", 12345675323),
+("robocop", 12345675322),
+("dinho do mamonas", 1234567892);
+
+INSERT INTO editora
+(nome_fantasia_editora ,razao_social_editora, telefone_editora, rua_editora, bairro_editora, cidade_editora, estado_editora)
+VALUES
+('Editora B','cereja no bolo',1234567904, "rua sem saida", 'bairro sem entrada', 'cidade acabada', 'estado próprio'),
+("Editora C",'sem querer', 12348900987, 'rua maresia', 'bairro alto mar', 'cidade bonita', 'estado islamico'),
+('Editora A','anhanguera', 123456787654, 'rua pistão', 'bairro loucurada', 'cidade do mofo', 'estado liquído');
+
+INSERT INTO financiador
+(nome_financiador,`CNPJ_financiador`)
+VALUES
+('pedrinho matador',123456789055),
+('joao derruba avião', 123456788765);
+
+INSERT INTO livro
+(ISBN_livro,titulo_livro,valor_livro,categoria_livro)
+VALUES
+(9788537807842,'A Arte da Guerra',30.00,'ação'),
+(9788576834848,'O Pequeno Príncipe',40.00,'ficção'),
+(9788535914849,'Cem Anos de Solidão',50.00,'romance');
+
+INSERT INTO pedido
+(qnt_pedido, livro_id, cliente_id)
+VALUES
+(3, 12, 8),
+(6, 14, 9),
+(9, 16, 10);
