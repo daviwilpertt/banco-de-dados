@@ -20,5 +20,5 @@ constraints // são regras para aplicar nas colunas, limitam os tipos de dados i
 	CHECK: condição (idade >=18)
 	PRIMARY KEY
 	FOREIGN KEY
-
+dados tipo DATE// em formato EUA | ano/mes/dia
 

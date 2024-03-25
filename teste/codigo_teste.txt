@@ -1,0 +1,48 @@
+-- Active: 1710194765744@@127.0.0.1@3306@teste
+CREATE TABLE pedido (
+    id_pedido INT NOT NULL AUTO_INCREMENT,
+    data_pedido DATE,
+    valor DECIMAL(10,2),
+    cliente_id INT,
+    acompanhamento_id INT,
+    PRIMARY KEY (id_pedido),
+    Foreign Key (cliente_id) REFERENCES cliente (id_cliente),
+    Foreign Key (acompanhamento_id) REFERENCES acompanhamento (id_acompanhamento)
+);
+
+CREATE TABLE cliente (
+id_cliente INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(45),
+cidade VARCHAR(45),
+PRIMARY KEY (id_cliente)
+);
+
+CREATE TABLE acompanhamento (
+id_acompanhamento INT NOT NULL AUTO_INCREMENT,
+situacao ENUM('transporte', 'coletado', 'rota de entrega', 'entregue'),
+PRIMARY KEY (id_acompanhamento)
+);
+
+INSERT INTO cliente
+(nome, cidade)
+VALUES
+('João', 'Macaé'),
+('Carlos', 'Salvador'),
+('Maria', 'Niteroí'),
+('Ana', 'Campinas'),
+('Marcos', 'Santos');
+
+INSERT INTO pedido
+(data_pedido, valor, cliente_id, acompanhamento_id)
+VALUES
+('2024-03-24', 250.00, 2, 1),
+('2024-03-25', 150.00, 1, 2),
+('2024-03-25', 450.00, 4, 3);
+
+INSERT INTO acompanhamento
+(situacao)
+VALUES
+('coletado'),
+('transporte'),
+('entregue');
+
