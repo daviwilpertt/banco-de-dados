@@ -1,0 +1,65 @@
+-- Active: 1710194765744@@127.0.0.1@3306@imobiliariax
+USE imobiliariax;
+
+
+CREATE TABLE imovel (
+    id_imovel INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    tipo ENUM('casa', 'apartamento'),
+    padrao ENUM('luxo','super luxo', 'alto padrão'),
+    codigo VARCHAR(45)
+);
+
+CREATE TABLE corretor (
+    id_corretor INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    nome_corretor VARCHAR(45) NOT NULL,
+    cpf BIGINT(11) UNIQUE,
+    ano_nascimento DATE,
+    cidade_corretor VARCHAR(45),
+    estado_corretor VARCHAR(45)
+);
+
+CREATE TABLE contrato (
+    id_contrato INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    data_horario_contrato DATETIME,
+    imovel_id INT,
+    corretor_id INT,
+    Foreign Key (corretor_id) REFERENCES corretor (id_corretor),
+    Foreign Key (imovel_id) REFERENCES imovel (id_imovel)
+);
+
+
+INSERT INTO contrato
+(data_horario_contrato, imovel_id, corretor_id)
+VALUES
+('')
+
+INSERT INTO corretor
+(nome_corretor, cpf, ano_nascimento, cidade_corretor, estado_corretor)
+VALUES
+('Pedro', 12345678904, '1999-03-18', 'Salvador', 'Bahia'),
+('Maria', 09876543219, '1945-09-24', 'Sao Paulo', 'São Paulo'),
+('José', 08955353412, '1678-12-22', 'Florianópolis', 'Santa Catarina'),
+('Ana', 09876543213, '1480-02-21', 'Capão Redondo', 'São Paulo'),
+('Jesus', 1, '0001-01-01', 'Belem', 'Pará');
+
+INSERT INTO imovel
+(tipo, padrao, codigo)
+VALUES
+('casa', 'alto padrão', 'FLO097'),
+('apartamento', 'luxo', 'AMZ532'),
+('apartamento', 'luxo', 'SPL443'),
+('casa', 'luxo', 'PRN642'),
+('apartamento', 'alto padrão', 'RGS135');
+
+INSERT INTO contrato
+(data_horario_contrato, imovel_id, corretor_id)
+VALUES
+('2024-03-25 18-20-20', 11, 1),
+('2024-03-26 19-21-21', 12, 2),
+('2024-03-27 20-22-22', 13, 3),
+('2024-03-28 21-23-23', 14, 4),
+('2024-03-29 22-24-24', 15, 5);
+
+SELECT corretor.nome_corretor, corretor.cpf,  imovel.tipo, imovel.padrao, imovel.codigo FROM contrato
+JOIN corretor ON contrato.corretor_id = corretor.id_corretor
+JOIN imovel ON contrato.imovel_id = imovel.id_imovel;
