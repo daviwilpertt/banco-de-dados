@@ -48,7 +48,7 @@ VALUES
 ('casa', 'alto padrão', 'FLO097'),
 ('apartamento', 'luxo', 'AMZ532'),
 ('apartamento', 'luxo', 'SPL443'),
-('casa', 'luxo', 'PRN642'),
+('casa', 'super luxo', 'PRN642'),
 ('apartamento', 'alto padrão', 'RGS135');
 
 INSERT INTO contrato
@@ -63,3 +63,11 @@ VALUES
 SELECT corretor.nome_corretor, corretor.cpf,  imovel.tipo, imovel.padrao, imovel.codigo FROM contrato
 JOIN corretor ON contrato.corretor_id = corretor.id_corretor
 JOIN imovel ON contrato.imovel_id = imovel.id_imovel;
+
+SELECT contrato.id_contrato, contrato.data_horario_contrato, corretor.nome_corretor, imovel.tipo FROM contrato
+JOIN corretor ON contrato.corretor_id = corretor.id_corretor 
+JOIN imovel ON contrato.imovel_id = imovel.id_imovel;
+
+SELECT imovel.tipo, imovel.padrao, contrato.data_horario_contrato, corretor.nome_corretor, corretor.ano_nascimento FROM contrato
+JOIN corretor ON contrato.corretor_id = corretor.id_corretor
+JOIN imovel ON contrato.imovel_id = imovel.id_imovel; 
