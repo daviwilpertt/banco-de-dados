@@ -22,4 +22,4 @@ constraints // são regras para aplicar nas colunas, limitam os tipos de dados i
 	FOREIGN KEY
 dados tipo DATE// em formato EUA | ano/mes/dia
 consulta entre tabelas // SELECT * FROM nome_tabela JOIN outra_tabela ON nome_tabela.chave_estrangeira = outra_tabela.chave_primaria
-
+criar uma view (atalho) // CREATE VIEW nome_atalho AS SELECT...

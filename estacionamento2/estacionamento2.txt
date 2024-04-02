@@ -1,0 +1,23 @@
+-- Active: 1710194765744@@127.0.0.1@3306@estacionamento
+USE estacionamento;
+
+CREATE TABLE cliente (
+    id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    dt_nascimento DATE
+);
+
+CREATE TABLE categoria (
+    id_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45),
+    descricao VARCHAR(100)
+);
+
+CREATE TABLE veiculo (
+    id_veiculo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(7),
+    cor VARCHAR(45),
+    cliente_id INT,
+    categoria_id INT,
+    Foreign Key (cliente_id) REFERENCES cliente (id_cliente),
+    Foreign Key (categoria_id) REFERENCES categoria (id_categoria)
+);
