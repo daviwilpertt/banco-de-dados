@@ -110,10 +110,10 @@ JOIN turma ON inscricao.turma_id = turma.id_turma
 
 
 SELECT * FROM inscricao
-JOIN aluno ON inscricao.aluno_id = aluno.id_aluno
+LEFT JOIN aluno ON inscricao.aluno_id = aluno.id_aluno
 UNION
 SELECT * FROM inscricao
-JOIN aluno ON inscricao.aluno_id = aluno.id_aluno
+RIGHT JOIN aluno ON inscricao.aluno_id = aluno.id_aluno
 
 CREATE VIEW vw_inscricao_aluno AS
 SELECT inscricao.id_inscricao, aluno.nome_aluno, aluno.cpf FROM inscricao
