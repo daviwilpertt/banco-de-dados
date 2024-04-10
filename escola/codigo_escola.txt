@@ -1,35 +1,23 @@
-CREATE DATABASE escola;
+-- Active: 1710194765744@@127.0.0.1@3306@escola
 USE escola;
 
-CREATE TABLE sala (
-id_sala INT NOT NULL AUTO_INCREMENT,
-nome VARCHAR(45),
-capacidade INT,
-PRIMARY KEY (id_sala) 
+CREATE TABLE aluno (
+    id_aluno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome_aluno VARCHAR(45),
+    matricula INT
 );
 
-CREATE TABLE professor (
-id_professor INT NOT NULL AUTO_INCREMENT,
-nome VARCHAR(45),
-formacao VARCHAR(45),
-PRIMARY KEY (id_professor)
-);
+INSERT INTO aluno
+(nome_aluno, matricula) 
+VALUES
+('carlos', 530),
+('joão', 480),
+('marcos', 650),
+('cleber', 150)
 
-CREATE TABLE aula (
-id_sala INT NOT NULL AUTO_INCREMENT,
-nome VARCHAR(45),
-PRIMARY KEY (id_sala)
-);
-
-CREATE TABLE turma (
-id_turma INT NOT NULL AUTO_INCREMENT,
-nome VARCHAR(45),
-periodo VARCHAR(45),
-PRIMARY KEY (id_turma)
-);
+CREATE VIEW vw_matricula_desc AS
+SELECT * FROM aluno
+ORDER BY matricula DESC
 
 
-ALTER TABLE turma 
-ADD COLUMN sala_id INT,
-ADD FOREIGN KEY (sala_id)
-REFERENCES sala (id_sala)
+SELECT id_aluno, nome AS nome_aluno, matricula AS matricula_aluno  FROM aluno
