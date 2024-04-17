@@ -27,3 +27,5 @@ criar uma view (atalho) // CREATE VIEW nome_atalho AS SELECT...
 consulta com condicao // SELECT * formato tabela WHERE condicao
 ordenar // ORDER BY coluna condicao (DESC | ASC)
 puxar outro nome da coluna // SELECT nome AS nome_cliente FROM cliente
+contagem de quantos registros na tabela // SELECT count(nome_coluna) FROM nome_tabela
+somar 
