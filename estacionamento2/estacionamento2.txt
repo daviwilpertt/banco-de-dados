@@ -1,0 +1,119 @@
+CREATE DATABASE estacionamento;
+
+USE estacionamento;
+
+CREATE TABLE cliente (
+    id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome_cliente VARCHAR(45),
+    dt_nascimento DATE
+);
+
+CREATE TABLE categoria (
+    id_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45),
+    descricao VARCHAR(100)
+);
+
+CREATE TABLE veiculo (
+    id_veiculo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(7),
+    cor VARCHAR(45),
+    cliente_id INT,
+    categoria_id INT,
+    Foreign Key (cliente_id) REFERENCES cliente (id_cliente),
+    Foreign Key (categoria_id) REFERENCES categoria (id_categoria)
+);
+
+CREATE TABLE estacionamento (
+    id_estacionamento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome_estacionamento VARCHAR(45),
+    capacidade INT,
+    data_estrada DATE,
+    data_saida DATE,
+    hora_entrada TIME,
+    hora_saida TIME,
+    veiculo_id INT,
+    Foreign Key (veiculo_id) REFERENCES veiculo (id_veiculo)
+);
+
+INSERT INTO categoria 
+(nome, descricao)
+VALUES
+('utilitario', 'pessoas e cargas'),
+('van', 'vaga para vans'),
+('pick-up', 'picapes');
+
+INSERT INTO cliente
+(nome_cliente, dt_nascimento)
+VALUES
+('Moe', '1982-02-28'),
+('Arthur', '1850-03-14'),
+('Mc Gorila', '1985-09-12');
+
+INSERT INTO veiculo
+(placa, cor, cliente_id, categoria_id)
+VALUES
+('AAA2020', 'preto', 2, 4),
+('BBB1111', 'branco', 1, 6),
+('CCC5050', 'branco escuro',3 ,5),
+('RRR2525', 'azul', 1, 5),
+('DDD1234', 'preto claro',2 ,6);
+
+INSERT INTO estacionamento
+(nome_estacionamento, capacidade, data_estrada, data_saida, hora_entrada, hora_saida, veiculo_id)
+VALUES
+('coringa', 100, '2024-04-05', '2024-04-05', '12:00', '13:00', 4),
+('batman', 200, '2024-04-06', '2024-04-06', '13:00', '14:00', 5),
+('charada', 300, '2024-04-07', '2024-04-07', '15:00', '16:00', 6),
+('arlequina', 400, '2024-04-07', '2024-04-07', '17:00', '18:00', 8);
+
+--parte 1
+
+SELECT * FROM veiculo
+INNER JOIN categoria ON veiculo.categoria_id = categoria.id_categoria
+INNER JOIN cliente ON veiculo.cliente_id = cliente.id_cliente;
+
+SELECT * FROM veiculo
+LEFT JOIN cliente ON veiculo.cliente_id = cliente.id_cliente;
+
+SELECT * FROM veiculo
+RIGHT JOIN categoria ON veiculo.categoria_id = categoria.id_categoria;
+
+SELECT * FROM veiculo
+LEFT JOIN cliente ON veiculo.cliente_id = cliente.id_cliente
+UNION
+SELECT * FROM veiculo
+RIGHT JOIN cliente ON veiculo.cliente_id = cliente.id_cliente
+
+CREATE VIEW vw_veiculo_cliente AS
+SELECT veiculo.id_veiculo, veiculo.placa, veiculo.cor, cliente.nome_cliente FROM veiculo
+INNER JOIN cliente ON veiculo.cliente_id = cliente.id_cliente
+
+--parte 2
+
+SELECT veiculo.placa, cliente.nome_cliente FROM veiculo
+RIGHT JOIN cliente ON veiculo.cliente_id = cliente.id_cliente
+
+SELECT cliente.nome_cliente, cliente.dt_nascimento, veiculo.placa FROM veiculo
+JOIN cliente ON veiculo.cliente_id = cliente.id_cliente AND placa = 'AAA2020'
+
+SELECT veiculo.placa, veiculo.cor, estacionamento.id_estacionamento FROM estacionamento
+JOIN veiculo ON estacionamento.veiculo_id = veiculo.id_veiculo and id_estacionamento = 1
+
+SELECT estacionamento.data_entrada, estacionamento.data_saida, veiculo.placa FROM estacionamento
+JOIN veiculo ON estacionamento.veiculo_id = veiculo.id_veiculo AND placa = 'BBB1111'
+
+SELECT estacionamento.nome_estacionamento, estacionamento.data_entrada, estacionamento.data_saida, veiculo.cor FROM estacionamento
+JOIN veiculo ON estacionamento.veiculo_id = veiculo.id_veiculo AND cor='branco'
+
+SELECT cliente.nome_cliente, categoria.nome FROM veiculo
+JOIN cliente ON veiculo.cliente_id = cliente.id_cliente
+JOIN categoria on veiculo.categoria_id = categoria.id_categoria AND nome= 'van'
+
+SELECT veiculo.placa, estacionamento.hora_entrada, estacionamento.hora_saida, veiculo.cor FROM estacionamento
+JOIN veiculo ON estacionamento.veiculo_id = veiculo.id_veiculo AND cor='preto'
+
+SELECT placa, nome_estacionamento, data_entrada, data_saida FROM estacionamento
+JOIN veiculo ON estacionamento.veiculo_id = veiculo.id_veiculo AND placa='ccc5050'
+
+
