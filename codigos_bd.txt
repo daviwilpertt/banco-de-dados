@@ -29,3 +29,5 @@ ordenar // ORDER BY coluna condicao (DESC | ASC)
 puxar outro nome da coluna // SELECT nome AS nome_cliente FROM cliente
 contagem de quantos registros na tabela // SELECT count(nome_coluna) FROM nome_tabela
 somar 
+valor maximo ou minimo de uma tabela // SELECT MAX ou MIN(nome_coluna) FROM tabela
+nao repetir tabelas com msm nome // SELECT DISTINCT FROM
