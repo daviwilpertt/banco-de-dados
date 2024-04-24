@@ -2,7 +2,7 @@ USE avaliativa2;
 
 CREATE TABLE aluno (
     id_aluno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome_cliente VARCHAR(45)
+    nome_aluno VARCHAR(45)
 );
 
 CREATE TABLE curso (
@@ -54,7 +54,7 @@ VALUES
 ('2020-06-10', 560, 'nao pago', 6);
 
 INSERT INTO aluno
-(nome_cliente) 
+(nome_aluno) 
 VALUES
 ('pelé'),
 ('maradona'),
