@@ -1,0 +1,32 @@
+-- Active: 1710194765744@@127.0.0.1@3306@comercio
+use comercio;
+
+CREATE TABLE pedido (
+    id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    data_horario DATETIME,
+    tipo_entrega ENUM('normal', 'urgente'),
+    preco DECIMAL(10,2),
+    quantidade INT,
+    valor_total DECIMAL(10,2),
+    valor_total_com_desconto DECIMAL(10,2)
+);
+
+INSERT INTO pedido
+(data_horario, tipo_entrega, preco, quantidade) 
+VALUES
+('2024-04-29 10:30', 'urgente', 10, 6),
+('2024-05-15 14:45', 'normal', 150, 8),
+('2024-06-03 08:01', 'urgente', 130, 15),
+('2024-07-20 18:20', 'normal', 80, 3),
+('2024-08-10 09:55', 'urgente', 90, 4),
+('2024-09-13 10:23', 'normal', 15, 5);
+
+DELIMITER $$
+CREATE TRIGGER tr_valor_pedido 
+BEFORE INSERT ON pedido
+FOR EACH ROW
+BEGIN
+    SET NEW.valor_total = preco * NEW.quantidade;
+    SET NEW.valor_total_com_desconto = valor_total - (valor_total * 0.1);
+END $$
+

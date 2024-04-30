@@ -31,3 +31,12 @@ contagem de quantos registros na tabela // SELECT count(nome_coluna) FROM nome_t
 somar 
 valor maximo ou minimo de uma tabela // SELECT MAX ou MIN(nome_coluna) FROM tabela
 nao repetir tabelas com msm nome // SELECT DISTINCT FROM
+
+DELIMITER $$ // delimitador do trigger (para que o trigger funcione)
+CREATE TRIGGER estoque_atualizado // nome do trigger
+AFTER INSERT ON tabela // quando acontece 
+FOR EACH ROW // para cada linha
+BEGIN // comando condicional
+UPDATE produto SET estoque = estoque - NEW.quantidade
+WHERE id_produto = NEW.produto_id;
+END $$ // finalizador do trigger 

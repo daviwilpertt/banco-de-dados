@@ -1,0 +1,43 @@
+-- Active: 1710194765744@@127.0.0.1@3306@gatilhos
+use gatilhos;
+
+CREATE TABLE produto (
+    id_produto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45),
+    preco DECIMAL(10,2),
+    estoque INT
+);
+
+CREATE TABLE pedido (
+    id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    data_horario DATETIME,
+    quantidade INT,
+    produto_id INT,
+    Foreign Key (produto_id) REFERENCES produto (id_produto)
+);
+
+INSERT INTO produto
+(nome, preco, estoque) 
+VALUES
+('TV', 1000, 250),
+('notebook', 3000, 350),
+('tablet', 800, 150);
+
+SELECT * FROM produto;
+
+DELIMITER $$
+CREATE TRIGGER estoque_atualizado
+AFTER INSERT ON pedido
+FOR EACH ROW
+BEGIN
+UPDATE produto SET estoque = estoque - NEW.quantidade
+WHERE id_produto = NEW.produto_id;
+END $$
+
+
+INSERT INTO pedido
+(data_horario, quantidade, produto_id) 
+VALUES
+('2024-04-29 14:00', 69, 2);
+
+
