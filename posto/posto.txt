@@ -1,0 +1,49 @@
+CREATE DATABASE posto_gasolina;
+USE posto_gasolina;
+
+
+CREATE TABLE posto (
+    id_posto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    estoque DECIMAL(10,2) CHECK(estoque > 0)
+);
+
+CREATE TABLE cliente (
+    id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    litros_abastecidos DECIMAL(10,2),
+    valor_total DECIMAL(10,2) check(valor_total > 0),
+    posto_id INT,
+    Foreign Key (posto_id) REFERENCES posto (id_posto)
+);
+
+DROP TABLE cliente;
+DROP TABLE posto;
+
+DELIMITER $$
+CREATE TRIGGER tr_atualizar_estoque 
+BEFORE INSERT ON cliente
+FOR EACH ROW
+BEGIN
+    UPDATE posto
+    SET estoque = estoque - NEW.litros_abastecidos
+    WHERE id_posto = NEW.posto_id;
+    SET NEW.valor_total = NEW.litros_abastecidos * 6.5;
+END $$
+
+SELECT * FROM cliente
+JOIN posto ON cliente.posto_id = posto.id_posto
+
+INSERT INTO posto
+(estoque) 
+VALUES
+(300),
+(500),
+(1000),
+(700);
+
+INSERT INTO cliente
+(litros_abastecidos, posto_id) 
+VALUES
+(30, 1),
+(45, 2),
+(60, 3),
+(120, 4);
