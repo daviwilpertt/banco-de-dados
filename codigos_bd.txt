@@ -41,7 +41,8 @@ UPDATE produto SET estoque = estoque - NEW.quantidade
 WHERE id_produto = NEW.produto_id;
 END $$ // finalizador do trigger 
 
-SHOW PROCEDURE STATUS nome_procedure; // mostas as modificacoes 
+SHOW PROCEDURE STATUS; // mostra todas as modificacoes
+SHOW CREATE PROCEDURE nome_procedure; // mostra as modificacoes de Procedure especifica
 
 DELIMITER $$
 CREATE Procedure consulta_mensalidade() // criando Procedure
