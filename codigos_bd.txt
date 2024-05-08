@@ -40,3 +40,11 @@ BEGIN // comando condicional
 UPDATE produto SET estoque = estoque - NEW.quantidade
 WHERE id_produto = NEW.produto_id;
 END $$ // finalizador do trigger 
+
+SHOW PROCEDURE STATUS nome_procedure; // mostas as modificacoes 
+
+DELIMITER $$
+CREATE Procedure consulta_mensalidade() // criando Procedure
+BEGIN SELECT * FROM mensalidade;
+END; $$ 
+CALL consulta_mensalidade() // chama a "função" (nao funciona no vscode, so workbench)
