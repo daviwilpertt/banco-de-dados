@@ -49,3 +49,14 @@ CREATE Procedure consulta_mensalidade() // criando Procedure
 BEGIN SELECT * FROM mensalidade;
 END; $$ 
 CALL consulta_mensalidade() // chama a "função" (nao funciona no vscode, so workbench)
+
+DELIMITER $$
+CREATE Procedure consulta_mensalidade(x INT) // parametro pra chamar o id
+BEGIN SELECT * FROM mensalidade
+WHERE id_mensalidade = x; // criando uma 'constante' pra id da tabela
+END; $$
+
+CREATE PROCEDURE inserir_usuario(IN inscricao_id INT, IN dt_vencimento DATE, IN valor DECIMAL(10,2), IN status_pagamento ENUM('pago', 'nao pago'))
+BEGIN
+    INSERT INTO mensalidade (inscricao_id, dt_vencimento, valor, status_pagamento) VALUES (inscricao_id, dt_vencimento, valor, status_pagamento);
+END;

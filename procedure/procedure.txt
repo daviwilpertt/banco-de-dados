@@ -1,0 +1,40 @@
+CREATE TABLE mensalidade (
+    id_mensalidade INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    inscricao_id INT,
+    dt_vencimento DATE,
+    valor DECIMAL(10,2),
+    status_pagamento ENUM('pago', 'nao pago')
+);
+
+SELECT * FROM mensalidade;
+
+DELIMITER $$
+CREATE Procedure consulta_mensalidade(x INT)
+BEGIN SELECT * FROM mensalidade
+WHERE id_mensalidade = x;
+END; $$
+
+CALL consulta_mensalidade(7);
+
+CREATE PROCEDURE inserir_usuario(inscricao_id INT, dt_vencimento DATE, valor DECIMAL(10,2), status_pagamento ENUM('pago', 'nao pago'))
+BEGIN
+    INSERT INTO mensalidade (inscricao_id, dt_vencimento, valor, status_pagamento) VALUES (inscricao_id, dt_vencimento, valor, status_pagamento);
+END;
+
+CALL inserir_usuario(3, '2024-05-13', 120, 'pago');
+
+DELIMITER $$
+CREATE PROCEDURE valor_maior_10000 (IN valorA DECIMAL(10,2))
+BEGIN 
+DECLARE mensagem TEXT(100);
+    IF valorA > 10000 THEN
+        INSERT INTO mensalidade(valor) VALUES (valorA);
+        SET mensagem = 'ok';
+    ELSE 
+        SET mensagem = 'valor menor que 10000';
+    END IF;
+    SELECT mensagem;
+END; $$
+CALL valor_maior_10000(9000);
+
+DROP Procedure valor_maior_10000;
