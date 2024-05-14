@@ -1,0 +1,89 @@
+use avaliativa3;
+
+CREATE Table estudante (
+    id_estudante INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    matricula INT,
+    curso VARCHAR(45),
+    cidade VARCHAR(45)
+);
+
+INSERT INTO estudante 
+(nome, matricula, curso, cidade) 
+VALUES
+('João Silva', 12345, 'Engenharia Civil', 'São Paulo'),
+('Maria Souza', 54321, 'Medicina', 'Rio de Janeiro'),
+('Pedro Santos', 98765, 'Administração', 'Belo Horizonte'),
+('Ana Oliveira', 67890, 'Direito', 'Brasília'),
+('Lucas Costa', 13579, 'Ciência da Computação', 'Porto Alegre');
+
+DELIMITER $$
+CREATE Procedure atualizar_matricula(p_id_estudante INT, p_matricula INT)
+begin UPDATE estudante 
+SET matricula = p_matricula
+WHERE id_estudante = p_id_estudante;
+SELECT * FROM estudante;
+END; $$
+
+CALL atualizar_matricula(5, 135);
+DROP Procedure atualizar_matricula;
+
+DELIMITER $$
+CREATE PROCEDURE deletar_estudante (p_id_estudante INT)
+begin
+DELETE FROM estudante WHERE id_estudante = p_id_estudante;
+SELECT * FROM estudante;
+END; $$
+
+CALL deletar_estudante(1);
+
+DELIMITER$$
+CREATE PROCEDURE qnt_estudante_por_curso (cursoA VARCHAR(45))
+begin SELECT count(curso) AS 'quantidade de alunos por curso' FROM estudante
+WHERE curso = cursoA;
+END; $$
+
+CALL qnt_estudante_por_curso('Direito');
+DROP Procedure qnt_estudante_por_curso;
+
+--parte 2
+
+CREATE TABLE cliente_private (
+    id_nome INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cpf BIGINT(11),
+    renda DECIMAL(10,2)
+);
+
+DELIMITER $$
+CREATE PROCEDURE inserir_cliente (cpfA VARCHAR(11), rendaA DECIMAL(10,2))
+BEGIN 
+DECLARE cpf_length INT;
+SET cpf_length = CHAR_LENGTH(cpfA);
+    IF cpf_length != 11 THEN
+        SELECT 'favor inserir um cpf válido';
+    ELSE
+        INSERT INTO cliente_private
+        (id_nome, cpf, renda) 
+        VALUES
+        (id_nomeA, cpfA, rendaA);
+        SELECT * FROM cliente_private;
+    END IF;
+END;$$
+
+CALL inserir_cliente('1234567890', 1000.2);
+DROP PROCEDURE inserir_cliente;
+
+DELIMITER $$
+CREATE PROCEDURE inserir_renda (rendaA DECIMAL(10,2))
+BEGIN 
+DECLARE mensagem TEXT(100);
+    IF rendaA > 15000 THEN
+        INSERT INTO cliente_private(renda) VALUES (rendaA);
+        SELECT * FROM cliente_private;
+    ELSE 
+        SET mensagem = 'Cliente Private é apenas para renda superior a R$15mil';
+    END IF;
+    SELECT mensagem;
+END; $$
+
+CALL inserir_renda(14999);
