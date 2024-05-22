@@ -60,3 +60,5 @@ CREATE PROCEDURE inserir_usuario(IN inscricao_id INT, IN dt_vencimento DATE, IN 
 BEGIN
     INSERT INTO mensalidade (inscricao_id, dt_vencimento, valor, status_pagamento) VALUES (inscricao_id, dt_vencimento, valor, status_pagamento);
 END;
+
+iniciar node_bd // npm init -y | npm install express --save | npm install nodemon -D | npm install mysql12 | 
