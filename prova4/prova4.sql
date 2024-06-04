@@ -32,7 +32,6 @@ VALUES ('davi', 12345678763),
     ('leonardo', 09876543245);
 
 DELIMITER $$
-
 CREATE PROCEDURE inserir_produto (nome_produtoA VARCHAR(45), codigoA VARCHAR(45), estoqueA INT)
 BEGIN 
 DECLARE msg TEXT(100);
@@ -46,14 +45,11 @@ ELSE
     SET msg = 'codigo deve ter 5 digitos';
 END IF;
 SELECT msg;
-END;
+END; $$
 
-$$
-
-CALL inserir_produto ('leite', '64323', 1000);
+CALL inserir_produto ('leite', '643663', 1000);
 
 DELIMITER $$
-
 CREATE TRIGGER estoque_atualizado
 AFTER INSERT ON compra
 FOR EACH ROW
@@ -81,6 +77,7 @@ INSERT INTO
     )
 VALUES ('2024-10-25 23:00', 4, 6, 2);
 
+
 SELECT
     id_produto,
     nome_produto,
@@ -93,6 +90,8 @@ GROUP BY
     produto.nome_produto,
     produto.codigo
 ORDER BY produto.id_produto;
+
+
 
 SELECT produto.id_produto, produto.nome_produto, produto.codigo, AVG(compra.quantidade) AS media_total_comprado
 FROM produto
